@@ -20,7 +20,7 @@ ined= Image.open(path_img)
 #initialise tkinter et ferme la fenetre pour meilleur expérience utilisateur
 root = tk.Tk()
 root.withdraw()
-print("Voulez-vous choisir le fichier de destination ? y/yes n/no \nPar défaut il sera enregistrer dans le dossier /Pictures/qr :")
+print("Voulez-vous changer le fichier de destination ? Y/N\nPar défaut il sera enregistrer dans le dossier /Pictures/qr :")
 while True:
     folder_choice= input()
     if folder_choice.lower() in yes_choices:
@@ -33,7 +33,7 @@ while True:
         break
         #faire le chemin si il n'existe pas
     else:
-        print("Entrez une valeur correct.")
+        print("Entrez une valeur correct.\n")
         continue
 #taille du qr code + correction 30%
 qr_big = qrcode.QRCode(
@@ -42,10 +42,16 @@ qr_big = qrcode.QRCode(
     box_size = 10,
     border = 4,
 )
-file = input("Entrez le nom de fichier : \n")
-url = input("Entrez l'url : \n")
-#crée le QRCode avec la data donnée par l'user
-qr_big.add_data(url)
+print("Entrez le nom pour le fichier : \n")
+while True:
+    file=input()
+    if "." in file:
+        print("Merci d'écrire uniquement le nom pour le fichier, sans l'extension")
+        continue
+    else:
+        print("Le fichier s'appelera "+file)
+        break
+
 
 print("Choisissez l'extension: png / jpg / pdf \n")
 # vérification si l'user rentre bien une extension attendue
@@ -56,17 +62,18 @@ while True:
     else:
         extension="."+extension
         break
-print(extension)
-print("L'extension sera du : "+extension+"\n")
-root.withdraw()
-print("Couleur de background : \n"
-      "Une fênetre s'ouvre pour choisir la couleur.")
+print("Le fichier sera donc : "+file+extension+"\n")
+url = input("Entrez l'url ou les données que vous voulez encoder: \n")
+#crée le QRCode avec la data donnée par l'user
+qr_big.add_data(url)
+
+print("Couleur de background : \n")
 bgColor = tk.colorchooser.askcolor()
 #la roulette de couleur nous donnes comme sorties le rgb et le # , on choisit le # pour plus de simplicité donc [1]
-print(bgColor[1])
+print("La couleur du background sera :"+bgColor[1]+"\n")
 print("Entrer la couleur du qrcode : \n")
 qrColor = tk.colorchooser.askcolor()
-print(qrColor[1])
+print("La couleur du QR Code sera :"+qrColor[1]+"\n")
 # Mettre les couleurs
 img_qr_big = qr_big.make_image(fill_color=qrColor[1], back_color=bgColor[1]).convert('RGB')
 print(
