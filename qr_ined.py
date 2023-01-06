@@ -21,6 +21,11 @@ def cleanInput(x):
     x= x.lower()
     x = x.strip()
     return x
+def alphanumTrier(file):
+  for character in file:
+    if not character.isalnum() and character != " " and character != "_" and character != "-":
+      return False
+  return True
 
 #initialise tkinter et ferme la fenetre pour meilleur expérience utilisateur
 root = tk.Tk()
@@ -29,7 +34,6 @@ print("Voulez-vous changer le fichier de destination ? Y/N\nPar défaut il sera 
 while True:
     folder_choice= input()
     folder_choice = cleanInput(folder_choice)
-    print(folder_choice)
     if folder_choice in yes_choices:
         #utilisation de tkinter pour le choix du folder pour enregistrer le fichier
         path_save = filedialog.askdirectory()
@@ -50,21 +54,16 @@ qr_big = qrcode.QRCode(
     border = 4,
 )
 print("Entrez le nom pour le fichier : \n")
-def is_alphanum_space(file):
-  for character in file:
-    if not character.isalnum() and character != " ":
-      return False
-  return True
 
 
 while True:
     file=input()
     file = file.strip()
-    if not is_alphanum_space(file):
+    if not alphanumTrier(file):
         print("Merci d'écrire le nom sans caractère spéciaux.")
         continue
     else:
-        print("Le fichier s'appelera "+file)
+        print("Le fichier s'appelera "+file+"\n")
         break
 
 
