@@ -56,7 +56,7 @@
  [],
  False,
  False,
- 1672925125,
+ 1673017726,
  [('run.exe',
    'C:\\Users\\georgin_ray\\Documents\\PycharmProjects\\pycharm\\python_qrcode\\venv\\lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit-intel\\run.exe',
    'EXECUTABLE')])

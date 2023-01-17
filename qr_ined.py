@@ -53,13 +53,14 @@ qr_big = qrcode.QRCode(
     box_size = 10,
     border = 4,
 )
-print("Entrez le nom pour le fichier : \n")
-
-
+print("Entrez le nom pour le fichier (sans extension): \n")
 while True:
     file=input()
     file = file.strip()
-    if not alphanumTrier(file):
+    if len(file) < 1:
+        print("Merci d'entrer un nom de fichier.")
+        continue
+    elif not alphanumTrier(file):
         print("Merci d'écrire le nom sans caractère spéciaux.")
         continue
     else:
@@ -75,13 +76,22 @@ while True:
     if len(extension) >= 5 or (extension != "png" and extension != "jpg" and extension != "pdf" and extension != ".png" and extension != ".jpg" and extension != ".pdf"):
         print("Entrez une extension valide :")
         continue
-    elif len(extension) == 3 :
+    elif len(extension) == 3:
         extension = "." + extension
         break
     else:
         break
 print("Le fichier sera donc : "+file+extension+"\n")
-url = input("Entrez l'url ou les données que vous voulez encoder: \n")
+
+print("Entrez l'url ou les données que vous voulez encoder: \n")
+while True:
+    url = input()
+    if len(url) < 1:
+        print("Merci d'entrer au moin 1 caractère. \n")
+        continue
+    else:
+        break
+
 #crée le QRCode avec la data donnée par l'user
 qr_big.add_data(url)
 
@@ -90,7 +100,13 @@ bgColor = tk.colorchooser.askcolor()
 #la roulette de couleur nous donnes comme sorties le rgb et le # , on choisit le # pour plus de simplicité donc [1]
 print("La couleur du background sera :"+bgColor[1]+"\n")
 print("Entrer la couleur du qrcode : \n")
-qrColor = tk.colorchooser.askcolor()
+while True:
+    qrColor = tk.colorchooser.askcolor()
+    if bgColor == qrColor:
+        print("La couleur du background et du qrcode ne peuvent pas être la même !")
+        continue
+    else:
+        break
 print("La couleur du QR Code sera :"+qrColor[1]+"\n")
 # Mettre les couleurs
 img_qr_big = qr_big.make_image(fill_color=qrColor[1], back_color=bgColor[1]).convert('RGB')
