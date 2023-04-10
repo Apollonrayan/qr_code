@@ -5,7 +5,6 @@ import os
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import colorchooser
-import string
 
 #variable
 yes_choices=['yes','y','oui','o']
@@ -13,7 +12,8 @@ no_choices=['no','n','non']
 both_choice='2'
 # récupère l'user
 user = os.environ.get('USERNAME')
-path_img = '\\\ined.fr\\Partages\\Sce_info\\03 - COMMUNICATION_interne_SSI\\img\\ined.png'
+# path_img = '\\\ined.fr\\Partages\\Sce_info\\03 - COMMUNICATION_interne_SSI\\img\\ined.png'
+path_img = 'Logo-INED.jpg'
 path_save = 'C:\\Users\\'+ user +'\\Pictures\\qr\\'
 ined= Image.open(path_img)
 ### - qrcode maker underneath
@@ -30,13 +30,13 @@ def alphanumTrier(file):
 #initialise tkinter et ferme la fenetre pour meilleur expérience utilisateur
 root = tk.Tk()
 root.withdraw()
-print("Voulez-vous changer le fichier de destination ? Y/N\nPar défaut il sera enregistrer dans le dossier /Pictures/qr :")
+print("Voulez-vous changer le fichier de destination ? Y/N\nPar défaut il sera enregistré dans le dossier /Pictures/qr :")
 while True:
     folder_choice= input()
     folder_choice = cleanInput(folder_choice)
     if folder_choice in yes_choices:
         #utilisation de tkinter pour le choix du folder pour enregistrer le fichier
-        path_save = filedialog.askdirectory()
+        path_save = filedialog.askdirectory() + "/"
         break
     elif folder_choice in no_choices:
         if not os.path.exists(path_save):
@@ -64,7 +64,7 @@ while True:
         print("Merci d'écrire le nom sans caractère spéciaux.")
         continue
     else:
-        print("Le fichier s'appelera "+file+"\n")
+        print("Le fichier s'appellera "+file+"\n")
         break
 
 
@@ -87,7 +87,7 @@ print("Entrez l'url ou les données que vous voulez encoder: \n")
 while True:
     url = input()
     if len(url) < 1:
-        print("Merci d'entrer au moin 1 caractère. \n")
+        print("Merci d'entrer au moins 1 caractère. \n")
         continue
     else:
         break
@@ -143,7 +143,7 @@ while True:
         print("Entrez une valeur correct.")
         continue
 
-if ined_logo is both_choice:
+if ined_logo == both_choice:
         print("Les images sont enregistrées dans : " + path_save + " \n\nLes QRCODEs s'ouvriront dans 3secondes....")
         time.sleep(3)
         # attend 3 sec
@@ -162,4 +162,3 @@ leave_script = input('Appuyez sur une touche pour quitter.')
 if leave_script:
     exit(0)
 # leave le script
-
