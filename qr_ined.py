@@ -12,7 +12,7 @@ no_choices=['no','n','non']
 both_choice='2'
 # récupère l'user
 user = os.environ.get('USERNAME')
-# path_img = '\\\ined.fr\\Partages\\Sce_info\\03 - COMMUNICATION_interne_SSI\\img\\ined.png'
+# path_img = 'X'
 path_img = 'Logo-INED.jpg'
 path_save = 'C:\\Users\\'+ user +'\\Pictures\\qr\\'
 ined= Image.open(path_img)
